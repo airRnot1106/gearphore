@@ -1,0 +1,50 @@
+{
+  // ファイル保存時のフォーマット処理を有効化する
+  "editor.formatOnSave": true,
+
+  // 各ファイルのフォーマッターを指定する
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // ESLintの対象を設定
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+
+  // 保存時に実行される各コードアクションを有効化する
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.organizeImports": false // eslintでのimport順自動整列を実現するため無効
+  },
+
+  // VSCodeデフォルトのLintを無効にする（各Lintのルールで統一する際に設定）
+  "css.validate": false,
+  "javascript.format.enable": false,
+  "typescript.format.enable": false,
+
+  // スペルチェック
+  "cSpell.words": [
+    "classname",
+    "daisyui",
+    "nonconstructor",
+    "parens",
+    "tailwindcss"
+  ],
+
+  // TypeScriptの設定
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
+}
