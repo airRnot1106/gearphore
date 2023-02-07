@@ -13,15 +13,13 @@ export const useSafeParseData = () => {
   const createLog = useCreateLog();
 
   const safeParseData = useCallback(
-    <T extends z.Schema>(schema: T, data: unknown) => {
+    <T, S extends z.Schema<T>>(schema: S, data: T) => {
       const result = schema.safeParse(data);
       if (!result.success) {
         const code: LogCode = 'INVALID_OPERATION';
         createLog({ code, message: t.ERROR[code] });
-        return result.error;
-      } else {
-        return result.data;
       }
+      return result;
     },
     [createLog, t.ERROR]
   );
