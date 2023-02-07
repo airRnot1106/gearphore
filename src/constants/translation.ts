@@ -22,6 +22,10 @@ interface ITranslation {
     LABEL: string;
     SUCCESS: string;
   };
+  ERROR: {
+    NOT_INITIALIZED_LOG: string;
+    INVALID_OPERATION: string;
+  };
   GEAR: {
     HEAD: string;
     CLOTHES: string;
@@ -90,6 +94,10 @@ export const I18N_JA = {
     LABEL: 'コピー',
     SUCCESS: 'コピーしました',
   },
+  ERROR: {
+    NOT_INITIALIZED_LOG: '不明なエラーが発生しました',
+    INVALID_OPERATION: '不正な操作が行われました',
+  },
   GEAR: {
     HEAD: 'アタマ',
     CLOTHES: 'フク',
@@ -157,6 +165,10 @@ export const I18N_EN = {
   COPY: {
     LABEL: 'Copy',
     SUCCESS: 'Copied',
+  },
+  ERROR: {
+    NOT_INITIALIZED_LOG: 'An unknown error occurred',
+    INVALID_OPERATION: 'Invalid operation',
   },
   GEAR: {
     HEAD: 'Head',
