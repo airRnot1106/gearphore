@@ -337,7 +337,7 @@ export type Summary = z.infer<typeof summarySchema>;
 
 // Coordinate
 
-export type CoordinateIdsAtom = CoordinateId;
+export type CoordinateIdsAtom = CoordinateId[];
 
 export type CoordinateAtom = CoordinateBase;
 export type CoordinateAtomParam = { id: CoordinateId };
