@@ -13,6 +13,9 @@ export type CoordinateBase = z.infer<typeof coordinateBaseSchema>;
 export const coordinateIdSchema = coordinateBaseSchema.shape.id;
 export type CoordinateId = z.infer<typeof coordinateIdSchema>;
 
+export const coordinateNameSchema = coordinateBaseSchema.shape.name;
+export type CoordinateName = z.infer<typeof coordinateNameSchema>;
+
 // Gear
 
 export const gears = ['HEAD', 'CLOTHES', 'SHOES'] as const;
