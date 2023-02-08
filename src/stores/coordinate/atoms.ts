@@ -28,5 +28,13 @@ export const coordinateAtom = atomFamily<CoordinateAtom, CoordinateAtomParam>({
 
 export const powerAtom = atomFamily<PowerAtom, PowerAtomParam>({
   key: 'PowerAtom',
-  default: 'NULL',
+  default: selectorFamily<PowerAtom, PowerAtomParam>({
+    key: 'PowerAtom/Default',
+    get:
+      ({ slot }) =>
+      () => ({
+        slot,
+        name: 'NULL',
+      }),
+  }),
 });
