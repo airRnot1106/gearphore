@@ -377,5 +377,5 @@ export type PowerStateParam = { id: CoordinateId; gear: Gear; slot: Slot };
 
 // Summary
 
-export type SummaryState = Summary[];
-export type SummaryStateParam = { id: CoordinateId };
+export type SummariesState = Summary[];
+export type SummariesStateParam = { id: CoordinateId };
