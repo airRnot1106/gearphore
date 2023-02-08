@@ -2,7 +2,13 @@ import { z } from 'zod';
 
 import type { I18N_EN, I18N_JA } from '@/constants/translation';
 
+import type { ReadOnlySelectorOptions } from 'recoil';
+
 /* Utils */
+
+export type RecoilSelectorGetter = Parameters<
+  ReadOnlySelectorOptions<unknown>['get']
+>['0'];
 
 export type Entries<T extends object> = {
   [K in keyof T]: [K, T[K]];
