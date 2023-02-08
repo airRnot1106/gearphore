@@ -34,7 +34,7 @@ export type Slot = z.infer<typeof slotSchema>;
 
 // Power
 
-export const powers = [
+export const powerNames = [
   'NULL',
   'INK_RECOVERY_UP',
   'INK_RESISTANCE_UP',
@@ -63,7 +63,13 @@ export const powers = [
   'OBJECT_SHREDDER',
   'STEALTH_JUMP',
 ] as const;
-export const powerSchema = z.enum(powers);
+export const powerNameSchema = z.enum(powerNames);
+export type PowerName = z.infer<typeof powerNameSchema>;
+
+export const powerSchema = z.object({
+  slot: slotSchema,
+  name: powerNameSchema,
+});
 export type Power = z.infer<typeof powerSchema>;
 
 export const powerImageSources = [
@@ -126,7 +132,7 @@ export const powerToImageSource = {
   DROP_ROLLER: 'icon_drop_roller.webp',
   OBJECT_SHREDDER: 'icon_object_shredder.webp',
   STEALTH_JUMP: 'icon_stealth_jump.webp',
-} as const satisfies Record<Power, PowerImageSource>;
+} as const satisfies Record<PowerName, PowerImageSource>;
 
 export const powerToOrderEachGear = {
   NULL: {
@@ -291,25 +297,25 @@ export const powerToOrderEachGear = {
     CLOTHES: null,
     SHOES: 17,
   },
-} as const satisfies Record<Power, Record<GearWithCommon, number | null>>;
+} as const satisfies Record<PowerName, Record<GearWithCommon, number | null>>;
 
-export const gearPowersSchema = z.tuple([
+export const powersOfGearSchema = z.tuple([
   powerSchema,
   powerSchema,
   powerSchema,
   powerSchema,
 ]);
-export type GearPowers = z.infer<typeof gearPowersSchema>;
+export type PowersOfGear = z.infer<typeof powersOfGearSchema>;
 
-export const gearsPowersSchema = z.object({
-  HEAD: gearPowersSchema,
-  CLOTHES: gearPowersSchema,
-  SHOES: gearPowersSchema,
-} satisfies Record<Gear, typeof gearPowersSchema>);
-export type GearsPowers = z.infer<typeof gearsPowersSchema>;
+export const powersOfCoordinateSchema = z.object({
+  HEAD: powersOfGearSchema,
+  CLOTHES: powersOfGearSchema,
+  SHOES: powersOfGearSchema,
+} satisfies Record<Gear, typeof powersOfGearSchema>);
+export type PowersOfCoordinate = z.infer<typeof powersOfCoordinateSchema>;
 
 export const coordinateFullSchema = coordinateBaseSchema.extend({
-  gears: gearsPowersSchema,
+  gears: powersOfCoordinateSchema,
 });
 export type CoordinateFull = z.infer<typeof coordinateFullSchema>;
 
@@ -326,7 +332,7 @@ export const summaryTotalSchema = z.object({
 export type SummaryTotal = z.infer<typeof summaryTotalSchema>;
 
 export const summarySchema = z.object({
-  power: powerSchema,
+  power: powerNameSchema,
   main: z.number().int().min(0).max(3),
   sub: z.number().int().min(0).max(9),
   total: summaryTotalSchema,
@@ -359,6 +365,11 @@ export type CoordinateBaseStateParam = { id: CoordinateId };
 export type CoordinateFullState = CoordinateFull;
 export type CoordinateFullStateParam = { id: CoordinateId };
 
+export type CoordinateJsonState = string;
+export type CoordinateJsonStateParam = { id: CoordinateId };
+
+export type CoordinateAllJsonState = string;
+
 // Power
 
 export type PowerState = Power;
@@ -366,5 +377,5 @@ export type PowerStateParam = { id: CoordinateId; gear: Gear; slot: Slot };
 
 // Summary
 
-export type SummaryState = Summary;
+export type SummaryState = Summary[];
 export type SummaryStateParam = { id: CoordinateId };
