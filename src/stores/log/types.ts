@@ -5,7 +5,11 @@ import { z } from 'zod';
 export const logIdSchema = z.string();
 export type LogId = z.infer<typeof logIdSchema>;
 
-export const logCodes = ['NOT_INITIALIZED_LOG', 'INVALID_OPERATION'] as const;
+export const logCodes = [
+  'NOT_INITIALIZED_LOG',
+  'INVALID_OPERATION',
+  'INVALID_JSON',
+] as const;
 export const logCodeSchema = z.enum(logCodes);
 export type LogCode = z.infer<typeof logCodeSchema>;
 
@@ -16,6 +20,7 @@ export type LogLevel = z.infer<typeof logLevelSchema>;
 export const logCodeToLogLevel = {
   NOT_INITIALIZED_LOG: 'ERROR',
   INVALID_OPERATION: 'ERROR',
+  INVALID_JSON: 'ERROR',
 } as const satisfies Record<LogCode, LogLevel>;
 
 export const logSchema = z.object({

@@ -25,6 +25,7 @@ interface ITranslation {
   ERROR: {
     NOT_INITIALIZED_LOG: string;
     INVALID_OPERATION: string;
+    INVALID_JSON: string;
   };
   GEAR: {
     HEAD: string;
@@ -97,6 +98,7 @@ export const I18N_JA = {
   ERROR: {
     NOT_INITIALIZED_LOG: '不明なエラーが発生しました',
     INVALID_OPERATION: '不正な操作が行われました',
+    INVALID_JSON: '入力データが破損しています',
   },
   GEAR: {
     HEAD: 'アタマ',
@@ -169,6 +171,7 @@ export const I18N_EN = {
   ERROR: {
     NOT_INITIALIZED_LOG: 'An unknown error occurred',
     INVALID_OPERATION: 'Invalid operation',
+    INVALID_JSON: 'Input data is corrupted',
   },
   GEAR: {
     HEAD: 'Head',
