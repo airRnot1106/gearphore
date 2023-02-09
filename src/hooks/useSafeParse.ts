@@ -24,5 +24,26 @@ export const useSafeParseData = () => {
     [createLog, t.ERROR]
   );
 
-  return { safeParseData };
+  const safeParseJson = useCallback(
+    (str: string) => {
+      try {
+        const json = JSON.parse(str);
+        return {
+          success: true,
+          data: json,
+          error: null,
+        } as const;
+      } catch (e) {
+        createLog({ code: 'INVALID_JSON', message: t.ERROR.INVALID_JSON });
+        return {
+          success: false,
+          data: null,
+          error: e,
+        } as const;
+      }
+    },
+    [createLog, t.ERROR.INVALID_JSON]
+  );
+
+  return { safeParseData, safeParseJson };
 };
