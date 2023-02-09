@@ -10,10 +10,10 @@ import { siteNavigation } from '@/stores/site-navigation/types';
 
 import { useTranslationContext } from '@/providers/I18nProvider';
 
-interface SiteNavigationBarPresentationalProps {
+type SiteNavigationBarPresentationalProps = {
   activeItem: SiteNavigation;
   children: React.ReactElement;
-}
+};
 
 export const SiteNavigationBarPresentational = ({
   activeItem,

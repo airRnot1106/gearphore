@@ -1,8 +1,8 @@
 import { useTranslationContext } from '@/providers/I18nProvider';
 
-interface SiteHeaderPresentationalProps {
+type SiteHeaderPresentationalProps = {
   logotype: string;
-}
+};
 
 export const SiteHeaderPresentational = ({
   logotype,
