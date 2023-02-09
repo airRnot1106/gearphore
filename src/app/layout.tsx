@@ -17,10 +17,18 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>
+      <body className="text-neutral-content">
         <RecoilRoot>
           <DebugObserver />
-          {children}
+          <>
+            <div className="fixed top-0 left-0 z-50 h-[10dvh] w-full bg-base-200"></div>
+            <div className="z-0 h-[83dvh] bg-base-100">
+              <div className="h-[10dvh]"></div>
+              {children}
+              <div className="h-[13dvh]"></div>
+            </div>
+            <div className="fixed bottom-0 left-0 h-[7dvh]"></div>
+          </>
         </RecoilRoot>
       </body>
     </html>
