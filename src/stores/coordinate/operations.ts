@@ -1,19 +1,36 @@
+import { useRecoilCallback } from 'recoil';
+import { v4 as uuidV4 } from 'uuid';
+
 import {
   coordinateAtom,
   coordinateIdsAtom,
   powerAtom,
 } from '@/stores/coordinate/atoms';
+import { coordinateIdIndexState } from '@/stores/coordinate/selectors';
 import type {
   CoordinateAtomParam,
+  CoordinateBase,
   CoordinateFull,
   CoordinateId,
   CoordinateName,
   PowerAtomParam,
   PowerName,
 } from '@/stores/coordinate/types';
-import { slots, gears } from '@/stores/coordinate/types';
+import {
+  gearSchema,
+  powerNameSchema,
+  slotSchema,
+  coordinateFullSchema,
+  coordinateNameSchema,
+  coordinateIdSchema,
+  slots,
+  gears,
+} from '@/stores/coordinate/types';
+
+import { useSafeParseData } from '@/hooks/useSafeParse';
 
 import type { CallbackInterface } from 'recoil';
+import type { z } from 'zod';
 
 /* Operation */
 
@@ -150,3 +167,104 @@ const copyPowerAll = (
 };
 
 /* Hook */
+
+// Coordinate
+
+export const useCreateCoordinate = () => {
+  return useRecoilCallback((callback) => () => {
+    const id = uuidV4();
+    addCoordinateId(callback, id);
+  });
+};
+
+export const useDuplicateCoordinate = () => {
+  const { safeParseData } = useSafeParseData();
+  return useRecoilCallback((callback) => (param: CoordinateAtomParam) => {
+    const id = uuidV4();
+    const result = safeParseData(coordinateIdSchema, param.id);
+    if (!result.success) return;
+    const index = callback.snapshot
+      .getLoadable(coordinateIdIndexState(param.id))
+      .getValue();
+    interruptCoordinateId(callback, id, index + 1);
+    copyCoordinate(callback, param, { id });
+  });
+};
+
+export const useDeleteCoordinate = () => {
+  const { safeParseData } = useSafeParseData();
+  return useRecoilCallback((callback) => (param: CoordinateAtomParam) => {
+    const { id } = param;
+    const result = safeParseData(coordinateIdSchema, id);
+    if (!result.success) return;
+    deleteCoordinateId(callback, id);
+  });
+};
+
+export const useUpdateCoordinateName = () => {
+  const { safeParseData } = useSafeParseData();
+  return useRecoilCallback((callback) => (param: CoordinateBase) => {
+    const { id, name } = param;
+    const idResult = safeParseData(coordinateIdSchema, id);
+    if (!idResult.success) return;
+    const nameResult = safeParseData(coordinateNameSchema, name);
+    if (!nameResult.success) return;
+    updateCoordinateName(callback, { id }, name);
+  });
+};
+
+export const useImportCoordinateFromJson = () => {
+  const { safeParseData, safeParseJson } = useSafeParseData();
+  return useRecoilCallback((callback) => (jsonStr: string) => {
+    const parseJsonResult = safeParseJson(jsonStr);
+    if (!parseJsonResult.success) return;
+    const { data } = parseJsonResult;
+    const parseCoordinateResult = safeParseData<CoordinateFull, z.Schema>(
+      coordinateFullSchema,
+      data
+    );
+    if (!parseCoordinateResult.success) return;
+    const { data: coordinate } = parseCoordinateResult;
+    const id = uuidV4();
+    importCoordinate(callback, { ...coordinate, id });
+  });
+};
+
+export const useImportCoordinatesArrayFromJson = () => {
+  const { safeParseData, safeParseJson } = useSafeParseData();
+  return useRecoilCallback((callback) => (jsonStr: string) => {
+    const parseJsonResult = safeParseJson(jsonStr);
+    if (!parseJsonResult.success) return;
+    const { data } = parseJsonResult;
+    const parseCoordinateResult = safeParseData<CoordinateFull[], z.Schema>(
+      coordinateFullSchema.array(),
+      data
+    );
+    if (!parseCoordinateResult.success) return;
+    const { data: coordinate } = parseCoordinateResult;
+    coordinate.forEach((coordinate) => {
+      const id = uuidV4();
+      importCoordinate(callback, { ...coordinate, id });
+    });
+  });
+};
+
+// Power
+
+export const useUpdatePower = () => {
+  const { safeParseData } = useSafeParseData();
+  return useRecoilCallback(
+    (callback) => (param: PowerAtomParam & { power: PowerName }) => {
+      const { id, gear, slot, power } = param;
+      const idResult = safeParseData(coordinateIdSchema, id);
+      if (!idResult.success) return;
+      const gearResult = safeParseData(gearSchema, gear);
+      if (!gearResult.success) return;
+      const slotResult = safeParseData(slotSchema, slot);
+      if (!slotResult.success) return;
+      const powerResult = safeParseData(powerNameSchema, power);
+      if (!powerResult.success) return;
+      updatePower(callback, param, power);
+    }
+  );
+};
