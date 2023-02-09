@@ -4,6 +4,7 @@ import { RecoilRoot } from 'recoil';
 
 import '@/app/globals.css';
 import { SiteHeader } from '@/components/domain/site/molecules/SiteHeader';
+import { SiteNavigationBar } from '@/components/domain/site/molecules/SiteNavigationBar';
 import { DebugObserver } from '@/components/functional/DebugObserver';
 
 import { I18nProvider } from '@/providers/I18nProvider';
@@ -33,7 +34,9 @@ export default function RootLayout({
                 {children}
                 <div className="h-[13dvh]"></div>
               </div>
-              <div className="fixed bottom-0 left-0 h-[7dvh]"></div>
+              <div className="fixed bottom-0 left-0 h-[7dvh]">
+                <SiteNavigationBar />
+              </div>
             </>
           </I18nProvider>
         </RecoilRoot>
