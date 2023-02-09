@@ -24,6 +24,8 @@ import type {
   SummariesState,
   SummariesStateParam,
   Summary,
+  CoordinateId,
+  CoordinateIdIndexState,
 } from '@/stores/coordinate/types';
 
 import type { RecoilSelectorGetter } from '@/types';
@@ -34,6 +36,15 @@ const getCoordinateIds = (getter: RecoilSelectorGetter) => {
   const { get } = getter;
   const ids = get(coordinateIdsAtom);
   return ids;
+};
+
+const getCoordinateIdIndex = (
+  getter: RecoilSelectorGetter,
+  id: CoordinateId
+) => {
+  const ids = getCoordinateIds(getter);
+  const index = ids.indexOf(id);
+  return index;
 };
 
 const getCoordinateBase = (
@@ -143,6 +154,17 @@ export const coordinateIdsState = selector<CoordinateIdsState>({
   get: (getter) => {
     const ids = getCoordinateIds(getter);
     return ids;
+  },
+});
+
+export const coordinateIdIndexState = selectorFamily<
+  CoordinateIdIndexState,
+  CoordinateId
+>({
+  key: 'CoordinateIdIndexState',
+  get: (id) => (getter) => {
+    const index = getCoordinateIdIndex(getter, id);
+    return index;
   },
 });
 

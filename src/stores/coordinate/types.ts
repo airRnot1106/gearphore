@@ -362,6 +362,9 @@ export type PowerAtomParam = { id: CoordinateId; gear: Gear; slot: Slot };
 
 export type CoordinateIdsState = CoordinateId[];
 
+export type CoordinateIdIndexState = number;
+export type CoordinateIdIndexStateParam = { id: CoordinateId };
+
 export type CoordinateBaseState = CoordinateBase;
 export type CoordinateBaseStateParam = { id: CoordinateId };
 
