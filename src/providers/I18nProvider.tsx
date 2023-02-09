@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer } from 'react';
 
-import { I18N_JA } from '@/constants/translation';
+import { I18N_EN, I18N_JA } from '@/constants/translation';
 import type { Locale, Translation } from '@/types';
 
 const translationContext = createContext<Translation>(I18N_JA);
@@ -23,6 +23,8 @@ export const I18nProvider: React.FC<I18nProviderProps> = ({ children }) => {
     switch (action) {
       case 'ja':
         return I18N_JA;
+      case 'en':
+        return I18N_EN;
       default:
         return I18N_JA;
     }
