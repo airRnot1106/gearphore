@@ -16,27 +16,31 @@ export type Entries<T extends object> = {
 
 /* Unit */
 
-export const sizeSchema = z.enum(['xs', 'sm', 'md', 'lg']);
+export const sizeSchema = z.enum(['xs', 'sm', 'md', 'lg']).optional();
 export type Size = z.infer<typeof sizeSchema>;
 
-export const imageSizeSchema = z.enum(['sm', 'lg']);
+export const imageSizeSchema = z.enum(['sm', 'lg']).optional();
 export type ImageSize = z.infer<typeof imageSizeSchema>;
 
-export const positionSchema = z.enum(['top', 'bottom', 'left', 'right']);
+export const positionSchema = z
+  .enum(['top', 'bottom', 'left', 'right'])
+  .optional();
 export type Position = z.infer<typeof positionSchema>;
 
-export const alignSchema = z.enum(['start', 'end']);
+export const alignSchema = z.enum(['start', 'end']).optional();
 export type Align = z.infer<typeof alignSchema>;
 
-export const colorSchema = z.enum([
-  'primary',
-  'secondary',
-  'accent',
-  'info',
-  'success',
-  'warning',
-  'error',
-]);
+export const colorSchema = z
+  .enum([
+    'primary',
+    'secondary',
+    'accent',
+    'info',
+    'success',
+    'warning',
+    'error',
+  ])
+  .optional();
 export type Color = z.infer<typeof colorSchema>;
 
 export const alertSchema = z.enum([
@@ -47,6 +51,9 @@ export const alertSchema = z.enum([
   'error',
 ]);
 export type Alert = z.infer<typeof alertSchema>;
+
+export const shapeSchema = z.enum(['square', 'circle']).optional();
+export type Shape = z.infer<typeof shapeSchema>;
 
 /* Domain */
 
