@@ -6,8 +6,6 @@ import { siteNavigationAtom } from '@/stores/site-navigation/atoms';
 import type { SiteNavigation } from '@/stores/site-navigation/types';
 import { siteNavigationSchema } from '@/stores/site-navigation/types';
 
-import { useSafeParseData } from '@/hooks/useSafeParse';
-
 import type { CallbackInterface } from 'recoil';
 
 const switchSiteNavigation = (
@@ -21,11 +19,10 @@ const switchSiteNavigation = (
 /* Hook */
 
 export const useSwitchSiteNavigation = () => {
-  const { safeParseData } = useSafeParseData();
-
   return useRecoilCallback((callback) => (newState: SiteNavigation) => {
-    const result = safeParseData(siteNavigationSchema, newState);
+    const result = siteNavigationSchema.safeParse(newState);
     if (!result.success) return;
-    switchSiteNavigation(callback, result.data);
+    const { data } = result;
+    switchSiteNavigation(callback, data);
   });
 };

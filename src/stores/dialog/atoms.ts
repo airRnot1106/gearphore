@@ -10,7 +10,7 @@ export const dialogAtom = atomFamily<DialogAtom, DialogAtomParam>({
       ({ id }) =>
       () => ({
         id,
-        content: '',
+        messageParams: [],
         isShown: false,
       }),
   }),
