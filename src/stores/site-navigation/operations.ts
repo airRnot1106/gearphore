@@ -6,7 +6,7 @@ import { siteNavigationAtom } from '@/stores/site-navigation/atoms';
 import type { SiteNavigation } from '@/stores/site-navigation/types';
 import { siteNavigationSchema } from '@/stores/site-navigation/types';
 
-import { useSafeParseData } from '@/hooks/useSafeParseData';
+import { useSafeParseData } from '@/hooks/useSafeParse';
 
 import type { CallbackInterface } from 'recoil';
 

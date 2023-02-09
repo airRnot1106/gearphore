@@ -4,7 +4,7 @@ import { dialogAtom } from '@/stores/dialog/atoms';
 import type { DialogAtomParam } from '@/stores/dialog/types';
 import { dialogIdSchema, dialogIdToMs } from '@/stores/dialog/types';
 
-import { useSafeParseData } from '@/hooks/useSafeParseData';
+import { useSafeParseData } from '@/hooks/useSafeParse';
 
 import type { CallbackInterface } from 'recoil';
 
