@@ -23,7 +23,7 @@ interface ITranslation {
     SUCCESS: string;
   };
   ERROR: {
-    NOT_INITIALIZED_LOG: string;
+    UNKNOWN_ERROR: string;
     INVALID_OPERATION: string;
     INVALID_JSON: string;
   };
@@ -96,7 +96,7 @@ export const I18N_JA = {
     SUCCESS: 'コピーしました',
   },
   ERROR: {
-    NOT_INITIALIZED_LOG: '不明なエラーが発生しました',
+    UNKNOWN_ERROR: '不明なエラーが発生しました',
     INVALID_OPERATION: '不正な操作が行われました',
     INVALID_JSON: '入力データが破損しています',
   },
@@ -169,7 +169,7 @@ export const I18N_EN = {
     SUCCESS: 'Copied',
   },
   ERROR: {
-    NOT_INITIALIZED_LOG: 'An unknown error occurred',
+    UNKNOWN_ERROR: 'An unknown error occurred',
     INVALID_OPERATION: 'Invalid operation',
     INVALID_JSON: 'Input data is corrupted',
   },
