@@ -43,14 +43,14 @@ export const colorSchema = z
   .optional();
 export type Color = z.infer<typeof colorSchema>;
 
-export const alertSchema = z.enum([
+export const levelSchema = z.enum([
   'normal',
   'info',
   'success',
   'warning',
   'error',
 ]);
-export type Alert = z.infer<typeof alertSchema>;
+export type Level = z.infer<typeof levelSchema>;
 
 export const shapeSchema = z.enum(['square', 'circle']).optional();
 export type Shape = z.infer<typeof shapeSchema>;
