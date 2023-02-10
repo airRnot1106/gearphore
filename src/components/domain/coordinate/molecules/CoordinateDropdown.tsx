@@ -7,8 +7,12 @@ import type { DropdownProps } from '@/components/base/molecules/Dropdown';
 import { Dropdown } from '@/components/base/molecules/Dropdown';
 
 import { useDuplicateCoordinate } from '@/stores/coordinate/operations';
-import { coordinateJsonState } from '@/stores/coordinate/selectors';
+import {
+  coordinateBaseState,
+  coordinateJsonState,
+} from '@/stores/coordinate/selectors';
 import type { CoordinateId } from '@/stores/coordinate/types';
+import { useCreateDialog } from '@/stores/dialog/operations';
 
 import { useTranslationContext } from '@/providers/I18nProvider';
 
@@ -43,9 +47,20 @@ export type CoordinateDropdownContainerProps = {
 export const CoordinateDropdown = ({
   coordinateId,
 }: CoordinateDropdownContainerProps) => {
+  const t = useTranslationContext();
+  const title = t.COORDINATE.CONTROL.DROPDOWN.LABEL;
+  const duplicateLabel = t.COORDINATE.CONTROL.DROPDOWN.DUPLICATE;
+  const exportLabel = t.COORDINATE.CONTROL.DROPDOWN.EXPORT;
+  const deleteLabel = t.COORDINATE.CONTROL.DROPDOWN.DELETE;
+  const exportMessage = t.COPY.DIALOG.SUCCESS;
+  const deleteMessage = t.COORDINATE.DIALOG.DELETE;
+
   const json = useRecoilValue(coordinateJsonState({ id: coordinateId }));
   const duplicateCoordinate = useDuplicateCoordinate();
   const deleteDuplicateCoordinate = useDuplicateCoordinate();
+
+  const { name } = useRecoilValue(coordinateBaseState({ id: coordinateId }));
+  const createDialog = useCreateDialog();
 
   const handleDuplicate = useCallback(() => {
     duplicateCoordinate({ id: coordinateId });
@@ -54,25 +69,30 @@ export const CoordinateDropdown = ({
     }
   }, [coordinateId, duplicateCoordinate]);
 
-  const handleExport = useCallback(() => {
-    navigator.clipboard.writeText(json);
+  const handleExport = useCallback(async () => {
+    await navigator.clipboard.writeText(json);
+    createDialog({ level: 'success', message: exportMessage });
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
     }
-  }, [json]);
+  }, [json, createDialog, exportMessage]);
 
   const handleDelete = useCallback(() => {
     deleteDuplicateCoordinate({ id: coordinateId });
+    createDialog({
+      level: 'info',
+      message: deleteMessage.replace('{s}', name),
+    });
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
     }
-  }, [coordinateId, deleteDuplicateCoordinate]);
-
-  const t = useTranslationContext();
-  const title = t.COORDINATE.CONTROL.DROPDOWN.LABEL;
-  const duplicateLabel = t.COORDINATE.CONTROL.DROPDOWN.DUPLICATE;
-  const exportLabel = t.COORDINATE.CONTROL.DROPDOWN.EXPORT;
-  const deleteLabel = t.COORDINATE.CONTROL.DROPDOWN.DELETE;
+  }, [
+    deleteDuplicateCoordinate,
+    coordinateId,
+    createDialog,
+    deleteMessage,
+    name,
+  ]);
 
   return (
     <CoordinateDropdownPresentational title={title}>
