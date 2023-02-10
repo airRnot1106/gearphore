@@ -1,45 +1,77 @@
 import { useRecoilCallback } from 'recoil';
+import { v4 as uuidV4 } from 'uuid';
 
-import { dialogAtom } from '@/stores/dialog/atoms';
-import type { DialogAtomParam } from '@/stores/dialog/types';
-import { dialogIdSchema, dialogIdToMs } from '@/stores/dialog/types';
+import { dialogIdsAtom, dialogAtom } from '@/stores/dialog/atoms';
+import { dialogsState } from '@/stores/dialog/selectors';
+import type { Dialog } from '@/stores/dialog/types';
 
 import type { CallbackInterface } from 'recoil';
 
 /* Operation */
 
-const showDialog = (
-  callback: CallbackInterface,
-  param: DialogAtomParam,
-  messageParams: string[]
-) => {
+const pushDialog = (callback: CallbackInterface) => {
   const { set } = callback;
-  set(dialogAtom(param), (prev) => ({ ...prev, messageParams, isShown: true }));
+  const id = uuidV4();
+  set(dialogIdsAtom, (prev) => [...prev, id]);
+  return id;
 };
 
-const hideDialog = (callback: CallbackInterface, param: DialogAtomParam) => {
+const initializeDialog = (
+  callback: CallbackInterface,
+  param: Pick<Dialog, 'id' | 'level' | 'message'>
+) => {
+  const { set } = callback;
+  const { id, level, message } = param;
+  set(dialogAtom({ id }), (prev) => ({
+    ...prev,
+    level,
+    message,
+    isShown: true,
+  }));
+};
+
+const hideDialog = (callback: CallbackInterface, param: Pick<Dialog, 'id'>) => {
   const { set } = callback;
   set(dialogAtom(param), (prev) => ({
     ...prev,
-    messageParams: [],
     isShown: false,
   }));
 };
 
+const hideAllDialogs = (callback: CallbackInterface) => {
+  const { snapshot } = callback;
+  const ids = snapshot.getLoadable(dialogIdsAtom).getValue();
+  ids.forEach((id) => {
+    hideDialog(callback, { id });
+  });
+};
+
+const cleanupDialog = (callback: CallbackInterface) => {
+  const { snapshot, set } = callback;
+  const dialogs = snapshot.getLoadable(dialogsState).getValue();
+  const ids = dialogs
+    .filter((dialog) => dialog.isShown)
+    .map((dialog) => dialog.id);
+  set(dialogIdsAtom, ids);
+};
+
 /* Hook */
 
-export const useShowDialog = () => {
+export const useCreateDialog = () => {
   return useRecoilCallback(
-    (callback) => (param: DialogAtomParam, messageParams: string[]) => {
-      const { id } = param;
-      const result = dialogIdSchema.safeParse(id);
-      if (!result.success) throw new Error('[FATAL]: Invalid dialog id');
-      showDialog(callback, param, messageParams);
-      const { data } = result;
-      const ms = dialogIdToMs[data];
+    (callback) => (param: Pick<Dialog, 'level' | 'message'>) => {
+      hideAllDialogs(callback);
+      const id = pushDialog(callback);
+      initializeDialog(callback, { ...param, id });
       setTimeout(() => {
-        hideDialog(callback, param);
-      }, ms);
+        hideDialog(callback, { id });
+      }, 2000);
     }
   );
+};
+
+export const useCleanupDialog = () => {
+  return useRecoilCallback((callback) => () => {
+    cleanupDialog(callback);
+  });
 };
