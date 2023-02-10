@@ -13,6 +13,7 @@ interface ITranslation {
       DROPDOWN: {
         LABEL: string;
         DUPLICATE: string;
+        EXPORT: string;
         DELETE: string;
       };
       OPEN_POWER_SUMMARY: string;
@@ -85,8 +86,9 @@ export const I18N_JA = {
       CHANGE_NAME: 'コーデ名を変更',
       DROPDOWN: {
         LABEL: 'コーデ操作メニュー',
-        DUPLICATE: 'コーデを複製',
-        DELETE: 'コーデを削除',
+        DUPLICATE: '複製',
+        EXPORT: 'エクスポート',
+        DELETE: '削除',
       },
       OPEN_POWER_SUMMARY: 'サマリーを開く',
     },
@@ -158,8 +160,9 @@ export const I18N_EN = {
       CHANGE_NAME: 'Change name',
       DROPDOWN: {
         LABEL: 'Coordinate control menu',
-        DUPLICATE: 'Duplicate coordinate',
-        DELETE: 'Delete coordinate',
+        DUPLICATE: 'Duplicate',
+        EXPORT: 'Export',
+        DELETE: 'Delete',
       },
       OPEN_POWER_SUMMARY: 'Open summary',
     },
