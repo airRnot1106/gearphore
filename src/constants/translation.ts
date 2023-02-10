@@ -18,10 +18,15 @@ interface ITranslation {
       };
       OPEN_POWER_SUMMARY: string;
     };
+    DIALOG: {
+      DELETE: string;
+    };
   };
   COPY: {
     LABEL: string;
-    SUCCESS: string;
+    DIALOG: {
+      SUCCESS: string;
+    };
   };
   ERROR: {
     UNKNOWN_ERROR: string;
@@ -92,10 +97,15 @@ export const I18N_JA = {
       },
       OPEN_POWER_SUMMARY: 'サマリーを開く',
     },
+    DIALOG: {
+      DELETE: '{s}を削除しました',
+    },
   },
   COPY: {
     LABEL: 'コピー',
-    SUCCESS: 'コピーしました',
+    DIALOG: {
+      SUCCESS: 'クリップボードにコピーしました',
+    },
   },
   ERROR: {
     UNKNOWN_ERROR: '不明なエラーが発生しました',
@@ -166,10 +176,15 @@ export const I18N_EN = {
       },
       OPEN_POWER_SUMMARY: 'Open summary',
     },
+    DIALOG: {
+      DELETE: 'Deleted {s}',
+    },
   },
   COPY: {
     LABEL: 'Copy',
-    SUCCESS: 'Copied',
+    DIALOG: {
+      SUCCESS: 'Copied to clipboard',
+    },
   },
   ERROR: {
     UNKNOWN_ERROR: 'An unknown error occurred',
