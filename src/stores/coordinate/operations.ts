@@ -2,6 +2,7 @@ import { useRecoilCallback } from 'recoil';
 import { v4 as uuidV4 } from 'uuid';
 import { z } from 'zod';
 
+import { useEnableAnimation } from '@/stores/animation/operations';
 import {
   coordinateAtom,
   coordinateIdsAtom,
@@ -165,14 +166,24 @@ const copyPowerAll = (
   });
 };
 
+const scrollIntoView = (id: CoordinateId) => {
+  const elm = document.getElementById(`c-${id}`);
+  elm?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+};
+
 /* Hook */
 
 // Coordinate
 
 export const useCreateCoordinate = () => {
+  const enableAnimation = useEnableAnimation();
   return useRecoilCallback((callback) => () => {
     const id = uuidV4();
     addCoordinateId(callback, id);
+    enableAnimation({ id, animationKey: 'SLIDE_IN_LEFT' });
+    process.nextTick(() => {
+      scrollIntoView(id);
+    });
   });
 };
 
@@ -188,6 +199,9 @@ export const useDuplicateCoordinate = () => {
       .getValue();
     interruptCoordinateId(callback, targetId, index + 1);
     copyCoordinate(callback, { id: data }, { id: targetId });
+    process.nextTick(() => {
+      scrollIntoView(targetId);
+    });
   });
 };
 

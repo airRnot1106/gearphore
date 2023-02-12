@@ -1,24 +1,31 @@
+import { useRecoilValue } from 'recoil';
+
 import { CoordinateToggleInput } from '@/components/domain/coordinate/atoms/CoordinateToggleInput';
 import { CoordinateDropdown } from '@/components/domain/coordinate/molecules/CoordinateDropdown';
 import { GearList } from '@/components/domain/gear/molecules/GearList';
 import { SummaryArea } from '@/components/domain/summary/molecules/SummaryArea';
 
+import { animationState } from '@/stores/animation/selectors';
+import type { Animation } from '@/stores/animation/types';
 import type { CoordinateId } from '@/stores/coordinate/types';
 
 import { useMedia } from '@/hooks/useMedia';
 
 export type CoordinateCardPresentationalProps = {
   coordinateId: CoordinateId;
+  animation: Animation;
 };
 
 export const CoordinateCardDesktopPresentational = ({
   coordinateId,
+  animation,
 }: CoordinateCardPresentationalProps) => {
   return (
     <div
-      id={`coord-${coordinateId}`}
+      id={`c-${coordinateId}`}
       className={
-        'space-y-1 rounded-3xl bg-neutral p-5 shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] '
+        'space-y-1 rounded-3xl bg-neutral p-5 shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] ' +
+        (animation.animations.SLIDE_IN_LEFT ? 'animate-slide-in-left ' : '')
       }
     >
       <div className="flex items-center justify-between">
@@ -47,10 +54,15 @@ export type CoordinateCardProps = {
 };
 
 export const CoordinateCard = ({ coordinateId }: CoordinateCardProps) => {
+  const animation = useRecoilValue(animationState({ id: coordinateId }));
+
   const { isDesktop } = useMedia();
 
   return isDesktop ? (
-    <CoordinateCardDesktopPresentational coordinateId={coordinateId} />
+    <CoordinateCardDesktopPresentational
+      coordinateId={coordinateId}
+      animation={animation}
+    />
   ) : (
     <div></div>
   );
