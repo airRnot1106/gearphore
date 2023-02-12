@@ -19,7 +19,7 @@ export type Entries<T extends object> = {
 export const sizeSchema = z.enum(['xs', 'sm', 'md', 'lg']).optional();
 export type Size = z.infer<typeof sizeSchema>;
 
-export const imageSizeSchema = z.enum(['sm', 'lg']).optional();
+export const imageSizeSchema = z.enum(['sm', 'lg']);
 export type ImageSize = z.infer<typeof imageSizeSchema>;
 
 export const positionSchema = z
