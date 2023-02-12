@@ -242,15 +242,16 @@ export const useImportCoordinateFromJson = () => {
 export const useImportCoordinatesArrayFromJson = () => {
   return useRecoilCallback((callback) => (jsonStr: string) => {
     const parseJsonResult = safeParseJson(jsonStr);
-    if (!parseJsonResult.success) return;
+    if (!parseJsonResult.success) return false;
     const { data } = parseJsonResult;
     const parseCoordinateResult = coordinateFullSchema.array().safeParse(data);
-    if (!parseCoordinateResult.success) return;
+    if (!parseCoordinateResult.success) return false;
     const { data: coordinate } = parseCoordinateResult;
     coordinate.forEach((coordinate) => {
       const id = uuidV4();
       importCoordinate(callback, { ...coordinate, id });
     });
+    return true;
   });
 };
 

@@ -38,6 +38,13 @@ interface ITranslation {
     CLOTHES: string;
     SHOES: string;
   };
+  IMPORT: {
+    LABEL: string;
+    DIALOG: {
+      SUCCESS: string;
+      ERROR: string;
+    };
+  };
   NAVIGATION: {
     MY_COORDINATES: string;
     IMPORT: string;
@@ -117,6 +124,13 @@ export const I18N_JA = {
     CLOTHES: 'フク',
     SHOES: 'クツ',
   },
+  IMPORT: {
+    LABEL: 'インポート',
+    DIALOG: {
+      SUCCESS: 'インポートしました',
+      ERROR: 'インポートに失敗しました',
+    },
+  },
   NAVIGATION: {
     MY_COORDINATES: 'マイコーデ',
     IMPORT: 'インポート',
@@ -195,6 +209,13 @@ export const I18N_EN = {
     HEAD: 'Head',
     CLOTHES: 'Clothes',
     SHOES: 'Shoes',
+  },
+  IMPORT: {
+    LABEL: 'Import',
+    DIALOG: {
+      SUCCESS: 'Imported',
+      ERROR: 'Failed to import',
+    },
   },
   NAVIGATION: {
     MY_COORDINATES: 'My coordinates',
