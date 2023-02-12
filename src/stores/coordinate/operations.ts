@@ -128,7 +128,8 @@ const updatePower = (
   newPower: PowerName
 ) => {
   const { set } = callback;
-  set(powerAtom(param), (power) => ({
+  const { id, gear, slot } = param;
+  set(powerAtom({ id, gear, slot }), (power) => ({
     ...power,
     name: newPower,
   }));
