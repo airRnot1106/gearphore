@@ -72,7 +72,7 @@ export const PowerSelectImage = ({
     ])
   ) as Record<GearWithCommon, LabelValue[]>;
 
-  const options = optionsEachGear[gear];
+  const options = slot === 0 ? optionsEachGear[gear] : optionsEachGear.COMMON;
 
   return (
     <PowerSelectImagePresentational
