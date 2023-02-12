@@ -324,14 +324,14 @@ export type CoordinateFull = z.infer<typeof coordinateFullSchema>;
 
 // Summary
 
-export const summaryNatation = ['NOTATION_57', 'NOTATION_39'] as const;
-export const summaryNatationSchema = z.enum(summaryNatation);
-export type SummaryNatation = z.infer<typeof summaryNatationSchema>;
+export const summaryNotation = ['NOTATION_57', 'NOTATION_39'] as const;
+export const summaryNotationSchema = z.enum(summaryNotation);
+export type SummaryNotation = z.infer<typeof summaryNotationSchema>;
 
 export const summaryTotalSchema = z.object({
   NOTATION_57: z.number().min(0).max(57),
   NOTATION_39: z.number().min(0).max(39),
-} satisfies Record<SummaryNatation, z.ZodNumber>);
+} satisfies Record<SummaryNotation, z.ZodNumber>);
 export type SummaryTotal = z.infer<typeof summaryTotalSchema>;
 
 export const summarySchema = z.object({
