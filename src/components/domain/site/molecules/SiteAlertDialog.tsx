@@ -36,7 +36,6 @@ export const SiteAlertDialog = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      console.log('cleanupDialog');
       cleanupDialog();
     }, 10000);
     return () => clearInterval(intervalId);
