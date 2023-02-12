@@ -114,12 +114,12 @@ const getPowersOfCoordinate = (
   return powers;
 };
 
-const getSummary = (
+const getSummaries = (
   getter: RecoilSelectorGetter,
   param: CoordinateAtomParam
 ) => {
   const powers = getPowersOfCoordinate(getter, param);
-  const summary = gears
+  const summaries = gears
     .flatMap((gear) => powers[gear])
     .reduce((acc, cur) => {
       const { slot, name: power } = cur;
@@ -144,7 +144,15 @@ const getSummary = (
       }
       return acc;
     }, [] as Summary[]);
-  return summary;
+  summaries.sort((a, b) => {
+    const notation = 'NOTATION_57';
+    if (a.power === 'NULL') return 1;
+    if (b.power === 'NULL') return -1;
+    if (a.total[notation] < b.total[notation]) return 1;
+    if (a.total[notation] > b.total[notation]) return -1;
+    return 0;
+  });
+  return summaries;
 };
 
 // State
@@ -223,7 +231,7 @@ export const summariesState = selectorFamily<
 >({
   key: 'SummariesState',
   get: (param) => (getter) => {
-    const summary = getSummary(getter, param);
-    return summary;
+    const summaries = getSummaries(getter, param);
+    return summaries;
   },
 });
