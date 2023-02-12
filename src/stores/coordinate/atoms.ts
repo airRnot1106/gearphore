@@ -21,7 +21,7 @@ export const coordinateAtom = atomFamily<CoordinateAtom, CoordinateAtomParam>({
       ({ id }) =>
       () => ({
         id,
-        name: '',
+        name: 'New',
       }),
   }),
 });
