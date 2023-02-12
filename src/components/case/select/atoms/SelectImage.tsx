@@ -3,7 +3,7 @@ import type { LabelValue } from '@/types';
 export type SelectImageProps = {
   current: React.ReactNode;
   options: LabelValue[];
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
 export const SelectImage = ({
