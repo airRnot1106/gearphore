@@ -23,7 +23,6 @@ const getDialogs = (
   getter: RecoilSelectorGetter,
   param: { ids: DialogId[] }
 ) => {
-  const { get } = getter;
   const { ids } = param;
   const dialogs = ids.map((id) => getDialog(getter, { id }));
   return dialogs;
