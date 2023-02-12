@@ -6,7 +6,10 @@ import { useRecoilValue } from 'recoil';
 import type { DropdownProps } from '@/components/base/molecules/Dropdown';
 import { Dropdown } from '@/components/base/molecules/Dropdown';
 
-import { useDuplicateCoordinate } from '@/stores/coordinate/operations';
+import {
+  useDeleteCoordinate,
+  useDuplicateCoordinate,
+} from '@/stores/coordinate/operations';
 import {
   coordinateBaseState,
   coordinateJsonState,
@@ -57,7 +60,7 @@ export const CoordinateDropdown = ({
 
   const json = useRecoilValue(coordinateJsonState({ id: coordinateId }));
   const duplicateCoordinate = useDuplicateCoordinate();
-  const deleteDuplicateCoordinate = useDuplicateCoordinate();
+  const deleteCoordinate = useDeleteCoordinate();
 
   const { name } = useRecoilValue(coordinateBaseState({ id: coordinateId }));
   const createDialog = useCreateDialog();
@@ -78,7 +81,7 @@ export const CoordinateDropdown = ({
   }, [json, createDialog, exportMessage]);
 
   const handleDelete = useCallback(() => {
-    deleteDuplicateCoordinate({ id: coordinateId });
+    deleteCoordinate({ id: coordinateId });
     createDialog({
       level: 'info',
       message: deleteMessage.replace('{s}', name),
@@ -86,13 +89,7 @@ export const CoordinateDropdown = ({
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
     }
-  }, [
-    deleteDuplicateCoordinate,
-    coordinateId,
-    createDialog,
-    deleteMessage,
-    name,
-  ]);
+  }, [deleteCoordinate, coordinateId, createDialog, deleteMessage, name]);
 
   return (
     <CoordinateDropdownPresentational title={title}>
