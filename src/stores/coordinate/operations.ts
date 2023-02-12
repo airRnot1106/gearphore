@@ -98,7 +98,6 @@ const copyCoordinate = (
   sourceParam: CoordinateAtomParam,
   targetParam: CoordinateAtomParam
 ) => {
-  addCoordinateId(callback, targetParam.id);
   copyCoordinateName(callback, sourceParam, targetParam, {
     shouldPutSuffix: true,
   });
