@@ -3,6 +3,7 @@
 import { RecoilRoot } from 'recoil';
 
 import '@/app/globals.css';
+import { SiteAlertDialog } from '@/components/domain/site/molecules/SiteAlertDialog';
 import { SiteHeader } from '@/components/domain/site/molecules/SiteHeader';
 import { SiteNavigationBar } from '@/components/domain/site/molecules/SiteNavigationBar';
 import { DebugObserver } from '@/components/functional/DebugObserver';
@@ -37,6 +38,7 @@ export default function RootLayout({
               <div className="fixed bottom-0 left-0 h-[7dvh]">
                 <SiteNavigationBar />
               </div>
+              <SiteAlertDialog />
             </>
           </I18nProvider>
         </RecoilRoot>
