@@ -181,9 +181,9 @@ export const useCreateCoordinate = () => {
     const id = uuidV4();
     addCoordinateId(callback, id);
     enableAnimation({ id, animationKey: 'SLIDE_IN_LEFT' });
-    process.nextTick(() => {
+    setTimeout(() => {
       scrollIntoView(id);
-    });
+    }, 1);
   });
 };
 
@@ -199,9 +199,9 @@ export const useDuplicateCoordinate = () => {
       .getValue();
     interruptCoordinateId(callback, targetId, index + 1);
     copyCoordinate(callback, { id: data }, { id: targetId });
-    process.nextTick(() => {
+    setTimeout(() => {
       scrollIntoView(targetId);
-    });
+    }, 1);
   });
 };
 
