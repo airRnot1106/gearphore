@@ -38,7 +38,6 @@ export const existsUser = async (id: string) => {
 };
 
 export const insertUser = async (id: string) => {
-  console.log(await supabase.auth.getSession());
   const { data, error } = await supabase
     .from('coordinates')
     .insert({ id, coordinate_json: '[]' })
