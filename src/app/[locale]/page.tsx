@@ -46,10 +46,10 @@ export default function Home({
 
   useEffect(() => {
     const json = localStorage.getItem('gearphore-coordinates');
-    // localStorage.removeItem('gearphore-coordinates');
     if (json) {
       importCoordinatesArrayFromJson(json);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
