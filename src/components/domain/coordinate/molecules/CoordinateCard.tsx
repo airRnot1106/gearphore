@@ -57,7 +57,7 @@ export const CoordinateCardMobilePresentational = ({
 }: CoordinateCardPresentationalProps) => {
   return (
     <div
-      id={`coord-${coordinateId}`}
+      id={`c-${coordinateId}`}
       className={
         'flex flex-col space-y-1 rounded-3xl bg-neutral p-5 shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] ' +
         (animation.animations.SLIDE_IN_LEFT ? 'animate-slide-in-left ' : '')
