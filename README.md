@@ -1,7 +1,9 @@
 <div align="center">
 <samp>
 
-# next-template-v2
+# Gearphore
+
+## Gear Simulator for Splatoon3
 
 </samp>
 </div>
@@ -11,55 +13,40 @@
 
 ## Highlights
 
-- Next.js 13
-- TypeScript
-- Recoil
-- ESLint
-- Prettier
-- TailwindCSS
-- daisyUI
-- Storybook
-- Vitest
+- 手軽なギア管理
+- 名前付けが可能
+- ギアは共有可能
 
-## Setup
+## How to use
 
-Make sure to install the dependencies:
+### マイコーデ
 
-```bash
-# yarn
-yarn install
+1. +ボタンでコーデを追加できます
+1. 鉛筆ボタンで名前の編集ができます
+1. ギアパワーアイコンをクリックしてギアパワーを変更できます
+1. スマートフォンの場合はコーデの右下のボタンを押すとサマリーが見れます
+1. サマリーでは 57 表記と 39 表記が選べます
 
-# npm
-npm install
+### インポート
 
-# pnpm
-pnpm install
-```
+1. コーデのメニューからエクスポートしたデータや、エクスポート画面からエクスポートしたデータをインポートできます
 
-## Development Server
+### エクスポート
 
-Start the development server on http://localhost:3000
+1. 現在登録されているコーデをすべてエクスポートできます
+1. 個別にエクスポートしたい場合はマイコーデ画面のそれぞれのコーデのメニューからエクスポートできます
 
-```bash
-yarn dev
-```
+## Issues
 
-## Testing
+バグを見つけたら Issue まで:bug:
 
-Test files should be located under src/\_\_tests\_\_/ and should be named `\*.spec.tsx`
+## Author
 
-Run the tests:
+- Github: [airRnot1106](https://github.com/airRnot1106)
+- NPM: [airrnot1106](https://www.npmjs.com/~airrnot1106)
+- Mastodon: [@airRnot@mstdn.jp](https://mstdn.jp/@airRnot)
+- Misskey: [@bot@misskey.dev](https://misskey.dev/@bot)
 
-```bash
-yarn test
-```
+## License
 
-## Storybook
-
-Story files should be located under src/components/ and should be named `\*.stories.ts`; They should be located with the `tsx` file
-
-Run the storybook server on http://localhost:6006
-
-```bash
-yarn storybook
-```
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/airRnot1106/gearphore/blob/main/LICENSE) file for details.
