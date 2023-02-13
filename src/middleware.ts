@@ -6,4 +6,5 @@ export const middleware = (req: NextRequest) => {
   if (req.nextUrl.pathname === '/') {
     return NextResponse.redirect(`${req.nextUrl.origin}/ja`);
   }
+  return;
 };
