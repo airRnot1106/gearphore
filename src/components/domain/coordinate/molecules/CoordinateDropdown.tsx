@@ -73,7 +73,7 @@ export const CoordinateDropdown = ({
   }, [coordinateId, duplicateCoordinate]);
 
   const handleExport = useCallback(async () => {
-    await navigator.clipboard.writeText(json);
+    await navigator.clipboard.writeText(`[${json}]`);
     createDialog({ level: 'success', message: exportMessage });
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
