@@ -1,3 +1,10 @@
+import { useRecoilValue } from 'recoil';
+
+import { SiteSignInButton } from '@/components/domain/site/atoms/SiteSignInButton';
+import { SiteSignOutButton } from '@/components/domain/site/atoms/SiteSignOutButton';
+
+import { userState } from '@/stores/user/selectors';
+
 import { useTranslationContext } from '@/providers/I18nProvider';
 
 type SiteHeaderPresentationalProps = {
@@ -7,6 +14,8 @@ type SiteHeaderPresentationalProps = {
 export const SiteHeaderPresentational = ({
   logotype,
 }: SiteHeaderPresentationalProps) => {
+  const user = useRecoilValue(userState);
+
   return (
     <header className="h-full">
       <div className="flex h-full items-center justify-between p-5">
@@ -15,7 +24,9 @@ export const SiteHeaderPresentational = ({
             {logotype}
           </h1>
         </div>
-        <div className="flex items-center"></div>
+        <div className="flex items-center">
+          {user ? <SiteSignOutButton /> : <SiteSignInButton />}
+        </div>
       </div>
     </header>
   );
