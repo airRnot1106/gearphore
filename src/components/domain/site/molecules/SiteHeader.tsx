@@ -1,8 +1,5 @@
 import { useRecoilValue } from 'recoil';
 
-import { SiteSignInButton } from '@/components/domain/site/atoms/SiteSignInButton';
-import { SiteSignOutButton } from '@/components/domain/site/atoms/SiteSignOutButton';
-
 import { userState } from '@/stores/user/selectors';
 
 import { useTranslationContext } from '@/providers/I18nProvider';
@@ -24,9 +21,7 @@ export const SiteHeaderPresentational = ({
             {logotype}
           </h1>
         </div>
-        <div className="flex items-center">
-          {user ? <SiteSignOutButton /> : <SiteSignInButton />}
-        </div>
+        <div className="flex items-center"></div>
       </div>
     </header>
   );

@@ -6,7 +6,6 @@ import '@/app/globals.css';
 import { SiteAlertDialog } from '@/components/domain/site/molecules/SiteAlertDialog';
 import { SiteHeader } from '@/components/domain/site/molecules/SiteHeader';
 import { SiteNavigationBar } from '@/components/domain/site/molecules/SiteNavigationBar';
-import { Authenticator } from '@/components/functional/Authenticator';
 import { DebugObserver } from '@/components/functional/DebugObserver';
 
 import { I18nProvider } from '@/providers/I18nProvider';
@@ -26,7 +25,6 @@ export default function RootLayout({
       <body className="text-neutral-content">
         <RecoilRoot>
           <DebugObserver />
-          <Authenticator />
           <I18nProvider>
             <>
               <div className="fixed top-0 left-0 z-50 h-[10dvh] w-full bg-base-200">

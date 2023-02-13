@@ -13,9 +13,9 @@ export const Authenticator = () => {
   const resetCoordinates = useResetCoordinates();
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
+    supabase.auth.getSession().then(async ({ data }) => {
       if (data) {
-        initializeUser({ session: data.session });
+        await initializeUser({ session: data.session });
       }
     });
     supabase.auth.onAuthStateChange((event, session) => {

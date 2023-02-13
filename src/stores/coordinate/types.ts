@@ -385,3 +385,8 @@ export type PowerStateParam = { id: CoordinateId; gear: Gear; slot: Slot };
 
 export type SummariesState = Summary[];
 export type SummariesStateParam = { id: CoordinateId };
+
+// Database
+
+export type DatabaseState = string | undefined;
+export type DatabaseStateParam = { id: string | undefined };
