@@ -1,7 +1,3 @@
-import { useRecoilValue } from 'recoil';
-
-import { userState } from '@/stores/user/selectors';
-
 import { useTranslationContext } from '@/providers/I18nProvider';
 
 type SiteHeaderPresentationalProps = {
@@ -11,8 +7,6 @@ type SiteHeaderPresentationalProps = {
 export const SiteHeaderPresentational = ({
   logotype,
 }: SiteHeaderPresentationalProps) => {
-  const user = useRecoilValue(userState);
-
   return (
     <header className="h-full">
       <div className="flex h-full items-center justify-between p-5">
