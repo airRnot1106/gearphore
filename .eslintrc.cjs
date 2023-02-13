@@ -90,6 +90,11 @@ module.exports = {
             position: 'before',
           },
           {
+            pattern: '@/providers/**',
+            group: 'parent',
+            position: 'before',
+          },
+          {
             pattern: '@/hooks/**',
             group: 'parent',
             position: 'before',
