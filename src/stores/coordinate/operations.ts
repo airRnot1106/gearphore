@@ -59,6 +59,11 @@ const deleteCoordinateId = (callback: CallbackInterface, id: CoordinateId) => {
   set(coordinateIdsAtom, (ids) => ids.filter((v) => v !== id));
 };
 
+const resetCoordinateId = (callback: CallbackInterface) => {
+  const { reset } = callback;
+  reset(coordinateIdsAtom);
+};
+
 // CoordinateName
 
 const updateCoordinateName = (
@@ -252,6 +257,12 @@ export const useImportCoordinatesArrayFromJson = () => {
       importCoordinate(callback, { ...coordinate, id });
     });
     return true;
+  });
+};
+
+export const useResetCoordinates = () => {
+  return useRecoilCallback((callback) => () => {
+    resetCoordinateId(callback);
   });
 };
 
